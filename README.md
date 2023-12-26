@@ -1,4 +1,4 @@
-[English README](./README_EN.md)  / [Discord](https://discord.gg/TMCM2PfHzQ) / QQ群 902124277
+[English README](./README_EN.md)  / [Discord](https://discord.gg/TMCM2PfHzQ)
 
 # 音乐人声分离工具
 
@@ -25,9 +25,9 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3
 
 
 
-# 预编译版使用方法/linux和nac源码部署
+# 预编译Win版使用方法/Linux和Mac源码部署
 
-1. 右侧[Releases](https://github.com/jianchang512/vocal-separate/releases)中下载预编译文件
+1. [点击此处打开Releases页面下载](https://github.com/jianchang512/vocal-separate/releases)预编译文件
 
 2. 下载后解压到某处，比如 E:/vocal-separate
 
@@ -38,7 +38,7 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3
 5. 如果机器拥有英伟达GPU，并正确配置了CUDA环境，将自动使用CUDA加速
 
 
-# 源码部署(linux/mac/window)
+# 源码部署(Linux/Mac/Window)
 
 0. 要求 python 3.9->3.11
 

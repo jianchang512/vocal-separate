@@ -27,7 +27,7 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3
 
 # 预编译Win版使用方法/Linux和Mac源码部署
 
-1. 右侧[Releases](https://github.com/jianchang512/vocal-separate/releases)中下载预编译文件
+1. [点击此处打开Releases页面下载](https://github.com/jianchang512/vocal-separate/releases)预编译文件
 
 2. 下载后解压到某处，比如 E:/vocal-separate
 

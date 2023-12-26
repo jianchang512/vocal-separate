@@ -1,4 +1,4 @@
-[English README](./README_EN.md)  / [Discord](https://discord.gg/TMCM2PfHzQ) / QQ群 902124277
+[English README](./README_EN.md)  / [Discord](https://discord.gg/TMCM2PfHzQ)
 
 # 音乐人声分离工具
 

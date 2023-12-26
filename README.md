@@ -25,7 +25,7 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3
 
 
 
-# 预编译版使用方法/linux和nac源码部署
+# 预编译Win版使用方法/Linux和Mac源码部署
 
 1. 右侧[Releases](https://github.com/jianchang512/vocal-separate/releases)中下载预编译文件
 
@@ -38,7 +38,7 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3
 5. 如果机器拥有英伟达GPU，并正确配置了CUDA环境，将自动使用CUDA加速
 
 
-# 源码部署(linux/mac/window)
+# 源码部署(Linux/Mac/Window)
 
 0. 要求 python 3.9->3.11
 

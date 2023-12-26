@@ -26,7 +26,7 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/fd377ed4-ae76-43d6
 
 
 
-# Precompiled Version Usage Instructions / Linux and Mac Source Deployment
+# Precompiled Version Win Usage Instructions / Linux and Mac Source Deployment
 
 1. Download the precompiled file from [Releases](https://github.com/jianchang512/vocal-separate/releases) on the right side.
 

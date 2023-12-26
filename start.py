@@ -49,14 +49,14 @@ def upload():
         if os.path.exists(wav_file) and os.path.getsize(wav_file) > 0:
             return jsonify({'code': 0, 'msg': cfg.transobj['lang1'], "data": os.path.basename(wav_file)})
         msg=""
-        if ext in ['.mp4', '.mov', '.avi', '.mkv', '.mpeg', '.mp3']:
+        if ext in ['.mp4', '.mov', '.avi', '.mkv', '.mpeg', '.mp3', '.flac']:
             video_file = os.path.join(cfg.TMP_DIR, f'{noextname}{ext}')
             audio_file.save(video_file)
             params = [
                 "-i",
                 video_file,
             ]
-            if ext != '.mp3':
+            if ext not in ['.mp3', '.flac']:
                 params.append('-vn')
             params.append(wav_file)
             rs = tool.runffmpeg(params)

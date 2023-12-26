@@ -81,7 +81,7 @@
         <ul class="layui-nav layui-layout-right">
             <!-- 移动端显示 -->
             <li id="checkupdate" class="layui-nav-item layui-hide "><a
-                    href="https://github.com/jianchang512/vocal-separate" class="layui-font-red" target="_blank"></a>
+                    href="https://github.com/jianchang512/vocal-separate/releases" class="layui-font-red" target="_blank"></a>
             </li>
             <li class="layui-nav-item layui-hide-xs"><a href="https://github.com/jianchang512/vocal-separate"
                                                         target="_blank">Github</a></li>
@@ -95,8 +95,8 @@
         <!-- 内容主体区域 -->
         <div class="layui-upload-drag" id="upload">
             <i class="layui-icon layui-icon-upload"></i>
-            <div data-cn="点击上传，或将音频视频文件拖拽到此处(wav,mp3,mp4,mov,mkv,avi,mpeg)"
-                 data-en="click to upload or drag video or audio to here(wav,mp3,mp4,mov,mkv,avi,mpeg)"></div>
+            <div data-cn="点击上传，或将音频视频文件拖拽到此处(wav,mp3,flac,mp4,mov,mkv,avi,mpeg)"
+                 data-en="click to upload or drag video or audio to here(wav,mp3,flac,mp4,mov,mkv,avi,mpeg)"></div>
             <div class="layui-hide my-1" id="preview"></div>
         </div>
         <form class="layui-form text-center">
@@ -158,7 +158,7 @@
             elem: '#upload',
             field: "audio",
             accept: "file",
-            exts: 'mp4|mp3|wav|avi|mkv|mpeg|mov',
+            exts: 'mp4|mp3|flac|wav|avi|mkv|mpeg|mov',
             url: '/upload', // 实际使用时改成您自己的上传接口即可。
             choose: function () {
                 layindex1 = layer.load();
@@ -203,12 +203,15 @@
             return false; // 阻止默认 form 跳转
         });
 
-
-        $.get('/checkupdate', function (res) {
-            if (res.code === 0 && res.msg) {
-                $('#checkupdate').removeClass('layui-hide').text(res.msg);
-            }
-        });
+		setTimeout(()=>{
+			$.get('/checkupdate', function (res) {
+				if (res.code === 0 && res.msg) {
+					$('#checkupdate').removeClass('layui-hide');
+					$('#checkupdate a').text(res.msg);
+				}
+			});
+		},60000);
+        
     });
 </script>
 </body>

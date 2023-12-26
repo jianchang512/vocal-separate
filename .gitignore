@@ -1,0 +1,13 @@
+venv
+.idea
+build
+dist
+pretrained_models/2stems
+pretrained_models/4stems
+pretrained_models/5stems
+pretrained_models/models-all.7z
+*.log
+*.wav
+*.mp3
+*.spec
+*.exe

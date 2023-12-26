@@ -2,7 +2,7 @@
 
 # 音乐人声分离工具
 
-这是一个极简的人声和背景音乐分离工具，完全本地化网页操作，无需连接外网，使用 2stems/4stems/5stems 模型。
+这是一个极简的人声和背景音乐分离工具，本地化网页操作，无需连接外网，使用 2stems/4stems/5stems 模型。
 
 > 
 > 将一首歌曲或者含有背景音乐的音视频文件，拖拽到本地网页中，即可将其中的人声和音乐声分离为单独的音频wav文件，可选单独分离“钢琴声”、“贝斯声”、“鼓声”等
@@ -17,8 +17,7 @@
 
 # 视频演示
 
-
-https://github.com/jianchang512/clone-voice/assets/3378335/4e63f2ac-cc68-4324-a4d9-ecf4d4f81acd
+https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3-b106-268888fc0240
 
 
 
@@ -55,7 +54,7 @@ https://github.com/jianchang512/clone-voice/assets/3378335/4e63f2ac-cc68-4324-a4
 
 5. win下解压 ffmpeg.7z，将其中的`ffmpeg.exe`和`ffprobe.exe`放在项目目录下, linux和mac 到 [ffmpeg官网](https://ffmpeg.org/download.html)下载对应版本ffmpeg，解压其中的`ffmpeg`和`ffprobe`二进制程序放到项目根目录下
 
-6. 下载模型压缩包，在项目根目录下的 `pretrained_models` 文件夹中解压，解压后，`pretrained_models`中将有3个文件夹，分别是`2stems`/`3stems`/`5stems`
+6. [下载模型压缩包](https://github.com/jianchang512/vocal-separate/releases/download/0.0/models-all.7z)，在项目根目录下的 `pretrained_models` 文件夹中解压，解压后，`pretrained_models`中将有3个文件夹，分别是`2stems`/`3stems`/`5stems`
 
 7. 执行  `python  start.py `，等待自动打开本地浏览器窗口。
 

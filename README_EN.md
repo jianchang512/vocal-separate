@@ -18,7 +18,7 @@ This is an extremely simple tool for separating vocals and background music, com
 # Video Demo
 
 
-https://github.com/jianchang512/clone-voice/assets/3378335/4e63f2ac-cc68-4324-a4d9-ecf4d4f81acd
+https://github.com/jianchang512/vocal-separate/assets/3378335/fd377ed4-ae76-43d6-b98a-b6eefe51b499
 
 
 
@@ -55,7 +55,7 @@ https://github.com/jianchang512/clone-voice/assets/3378335/4e63f2ac-cc68-4324-a4
 
 5. On Windows, unzip ffmpeg.7z and place `ffmpeg.exe` and `ffprobe.exe` in the project directory. On Linux and Mac, download the corresponding version of ffmpeg from [ffmpeg official website](https://ffmpeg.org/download.html), unzip it, and place the `ffmpeg` and `ffprobe` binary programs in the project root directory.
 
-6. 下载模型压缩包，在项目根目录下的 `pretrained_models` 文件夹中解压，解压后，`pretrained_models`中将有3个文件夹，分别是`2stems`/`3stems`/`5stems`
+6. [Download the model](https://github.com/jianchang512/vocal-separate/releases/download/0.0/models-all.7z) compression package, located in the root directory of the project in ` pretrained_models` folder, and after extraction,`pretrained_models` will be three folders namely 2steps/3steps/5steps
 
 6. Execute `python  start.py`, and wait for the local browser window to open automatically.
 

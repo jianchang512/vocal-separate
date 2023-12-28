@@ -19,8 +19,6 @@
 
 https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3-b106-268888fc0240
 
-
-
 ![image](./images/1.png)
 
 
@@ -79,6 +77,14 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3
 
 0. 中文音乐或中式乐器，建议选择使用`2stems`模型，其他模型对“钢琴、贝斯、鼓”可单独分离出文件
 1. 如果电脑没有NVIDIA显卡或未配置cuda环境，不要选择 4stems和5stems模型，尤其是处理较长时长的音频时, 否则很可能耗尽内存
+
+
+
+# 相关联项目
+
+[视频翻译配音工具](https://github.com/jianchang512/pyvideotrans)
+[声音克隆工具](https://github.com/jianchang512/clone-voice)
+[语音识别工具](https://github.com/jianchang512/stt)
 
 
 

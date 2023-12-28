@@ -3,24 +3,36 @@ import threading
 import sys
 from flask import Flask, request, render_template, jsonify, send_from_directory
 import os
-from gevent.pywsgi import WSGIServer
+from gevent.pywsgi import WSGIServer, WSGIHandler,LoggingLogAdapter
 from logging.handlers import RotatingFileHandler
 from vocal import cfg, tool
 from vocal.cfg import ROOT_DIR
 
 from spleeter.separator import Separator
 
+class CustomRequestHandler(WSGIHandler):
+    def log_request(self):
+        pass
+
+# 禁用 Werkzeug 默认的日志处理器
+log = logging.getLogger('werkzeug')
+log.handlers[:] = []
+log.setLevel(logging.WARNING)
 
 app = Flask(__name__, static_folder=os.path.join(ROOT_DIR, 'static'), static_url_path='/static',
             template_folder=os.path.join(ROOT_DIR, 'templates'))
+root_log = logging.getLogger()  # Flask的根日志记录器
+root_log.handlers = []
+root_log.setLevel(logging.WARNING)
+
 # 配置日志
-app.logger.setLevel(logging.INFO)  # 设置日志级别为 INFO
+app.logger.setLevel(logging.WARNING)  # 设置日志级别为 INFO
 # 创建 RotatingFileHandler 对象，设置写入的文件路径和大小限制
 file_handler = RotatingFileHandler(os.path.join(ROOT_DIR, 'vocal.log'), maxBytes=1024 * 1024, backupCount=5)
 # 创建日志的格式
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 # 设置文件处理器的级别和格式
-file_handler.setLevel(logging.INFO)
+file_handler.setLevel(logging.WARNING)
 file_handler.setFormatter(formatter)
 # 将文件处理器添加到日志记录器中
 app.logger.addHandler(file_handler)
@@ -122,12 +134,12 @@ def checkupdate():
 
 
 if __name__ == '__main__':
+    http_server = None
     try:
-        threading.Thread(target=tool.checkupdate).start()
-        http_server = None
+        threading.Thread(target=tool.checkupdate).start()        
         try:
             host = cfg.web_address.split(':')
-            http_server = WSGIServer((host[0], int(host[1])), app)
+            http_server = WSGIServer((host[0], int(host[1])), app ,handler_class=CustomRequestHandler)
             threading.Thread(target=tool.openweb, args=(cfg.web_address,)).start()
             http_server.serve_forever()
         finally:

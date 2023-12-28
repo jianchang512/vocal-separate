@@ -17,6 +17,8 @@ if not os.path.exists(MODEL_DIR):
     os.makedirs(MODEL_DIR, 0o777, exist_ok=True)
 if not os.path.exists(STATIC_DIR):
     os.makedirs(STATIC_DIR, 0o777, exist_ok=True)
+if not os.path.exists(FILES_DIR):
+    os.makedirs(FILES_DIR, 0o777, exist_ok=True)
 
 if sys.platform == 'win32':
     os.environ['PATH'] = f'{ROOT_DIR};{ROOT_DIR}\\ffmpeg;' + os.environ['PATH']

@@ -82,9 +82,11 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3
 
 # 相关联项目
 
-[视频翻译配音工具](https://github.com/jianchang512/pyvideotrans)
-[声音克隆工具](https://github.com/jianchang512/clone-voice)
-[语音识别工具](https://github.com/jianchang512/stt)
+[视频翻译配音工具:翻译字幕并配音](https://github.com/jianchang512/pyvideotrans)
+
+[声音克隆工具:用任意音色合成语音](https://github.com/jianchang512/clone-voice)
+
+[语音识别工具:本地离线的语音识别转文字工具](https://github.com/jianchang512/stt)
 
 
 

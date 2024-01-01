@@ -19,6 +19,8 @@
 
 https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3-b106-268888fc0240
 
+
+
 ![image](./images/1.png)
 
 
@@ -60,7 +62,7 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3
 
 # CUDA 加速支持
 
-**安装CUDA工具**
+**安装CUDA工具** [详细安装方法](https://juejin.cn/post/7318704408727519270)
 
 如果你的电脑拥有 Nvidia 显卡，先升级显卡驱动到最新，然后去安装对应的 
    [CUDA Toolkit 11.8](https://developer.nvidia.com/cuda-downloads)  和  [cudnn for CUDA11.X](https://developer.nvidia.com/rdp/cudnn-archive)。
@@ -77,16 +79,6 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3
 
 0. 中文音乐或中式乐器，建议选择使用`2stems`模型，其他模型对“钢琴、贝斯、鼓”可单独分离出文件
 1. 如果电脑没有NVIDIA显卡或未配置cuda环境，不要选择 4stems和5stems模型，尤其是处理较长时长的音频时, 否则很可能耗尽内存
-
-
-
-# 相关联项目
-
-[视频翻译配音工具:翻译字幕并配音](https://github.com/jianchang512/pyvideotrans)
-
-[声音克隆工具:用任意音色合成语音](https://github.com/jianchang512/clone-voice)
-
-[语音识别工具:本地离线的语音识别转文字工具](https://github.com/jianchang512/stt)
 
 
 

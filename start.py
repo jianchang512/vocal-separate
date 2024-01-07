@@ -7,7 +7,7 @@ from gevent.pywsgi import WSGIServer, WSGIHandler,LoggingLogAdapter
 from logging.handlers import RotatingFileHandler
 from vocal import cfg, tool
 from vocal.cfg import ROOT_DIR
-
+import subprocess
 from spleeter.separator import Separator
 
 class CustomRequestHandler(WSGIHandler):
@@ -103,11 +103,17 @@ def process():
         return jsonify({"code": 1, "msg": f"{wav_file} {cfg.langlist['lang5']}"})
     if not os.path.exists(os.path.join(cfg.MODEL_DIR, model, 'model.meta')):
         return jsonify({"code": 1, "msg": f"{model} {cfg.transobj['lang4']}"})
-
+    try:
+        p=subprocess.run(['ffprobe','-v','error','-show_entries',"format=duration",'-of', "default=noprint_wrappers=1:nokey=1", wav_file], capture_output=True)      
+        if p.returncode==0:
+            sec=float(p.stdout)  
+    except:
+        sec=1800
+    print(f'{sec=}')
     separator = Separator(f'spleeter:{model}', multiprocess=False)
     dirname = os.path.join(cfg.FILES_DIR, noextname)
     try:
-        separator.separate_to_file(wav_file, destination=dirname, filename_format="{instrument}.{codec}")
+        separator.separate_to_file(wav_file, destination=dirname, filename_format="{instrument}.{codec}", duration=sec)
     except Exception as e:
         return jsonify({"code": 1, "msg": str(e)})
     status={

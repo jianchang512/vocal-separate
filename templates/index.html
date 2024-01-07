@@ -189,16 +189,22 @@
             // 显示填写结果，仅作演示用
             layindex1 = layer.load();
             // 此处可执行 Ajax 等操作
-            $.post('/process', field, function (res) {
-                layer.close(layindex1)
-                if (res.code !== 0) {
-                    return layer.alert(res.msg, {title: false})
+            $.ajax({
+                url:'/process',
+                type:"POST",
+                data:field, 
+                timeout:3600000, 
+                success:function (res) {
+                    layer.close(layindex1)
+                    if (res.code !== 0) {
+                        return layer.alert(res.msg, {title: false})
+                    }
+                    let html = `<h3>${language === 'zh' ? "输出文件夹" : "Output folder"} ${res.dirname}</h3>`;
+                    res.urllist.forEach((it, i) => {
+                        html += `<div class="flex-left result-list"><span class="name">${res.data[i]}</span><audio src="${it}" controls></audio></div>`;
+                    });
+                    $("#result").html(html)
                 }
-                let html = `<h3>${language === 'zh' ? "输出文件夹" : "Output folder"} ${res.dirname}</h3>`;
-                res.urllist.forEach((it, i) => {
-                    html += `<div class="flex-left result-list"><span class="name">${res.data[i]}</span><audio src="${it}" controls></audio></div>`;
-                });
-                $("#result").html(html)
             });
             return false; // 阻止默认 form 跳转
         });

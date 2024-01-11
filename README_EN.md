@@ -1,4 +1,4 @@
-[English README](./README_EN.md)  / [Discord](https://discord.gg/TMCM2PfHzQ) / QQ群 902124277
+[English README](./README_EN.md) / [👑Donate project](https://github.com/jianchang512/pyvideotrans/blob/main/about.md) / [Discord](https://discord.gg/TMCM2PfHzQ)
 
 # Music Vocal Separation Tool
 
@@ -58,6 +58,43 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/fd377ed4-ae76-43d6
 6. [Download the model](https://github.com/jianchang512/vocal-separate/releases/download/0.0/models-all.7z) compression package, located in the root directory of the project in ` pretrained_models` folder, and after extraction,`pretrained_models` will be three folders namely 2steps/3steps/5steps
 
 6. Execute `python  start.py`, and wait for the local browser window to open automatically.
+
+
+# API
+
+api url: http://127.0.0.1:9999/api
+
+Method: POST
+
+Request params:
+
+    file: audio file
+
+    model: model name, 2stems,4stems,5stems
+
+Response: json
+    code:int, 0 succeed，>0 is error
+
+    msg:str,  error infomation
+
+    data: List[str], all wav separate result, eg. ['http://127.0.0.1:9999/static/files/2/accompaniment.wav']
+
+    status_text: dict[str,str], every wav name, {'accompaniment.wav': 'accompaniment audio', 'bass.wav': 'bass audio', 'drums.wav': 'drums audio', 'other.wav': 'other audio', 'piano.wav': 'piano audio', 'vocals.wav': 'vocals audio'}
+
+```
+import requests
+# api url
+url = "http://127.0.0.1:9999/api"
+files = {"file": open("C:\\Users\\c1\\Videos\\2.wav", "rb")}
+data={"model":"2stems"}
+response = requests.request("POST", url, timeout=600, data=data,files=files)
+print(response.json())
+
+{'code': 0, 'data': ['http://127.0.0.1:9999/static/files/2/accompaniment.wav', 'http://127.0.0.1:9999/static/files/2/vocals.wav'], 'msg': 'ok
+', 'status_text': {'accompaniment.wav': 'accompaniment', 'bass.wav': 'bass', 'drums.wav': 'drums', 'other.wav': 'other', 'piano.wav': 'piano', 'vocals.wav': 'vocals'}}
+
+
+```
 
 
 

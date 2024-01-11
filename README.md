@@ -1,4 +1,4 @@
-[English README](./README_EN.md)  / [Discord](https://discord.gg/TMCM2PfHzQ)
+[English README](./README_EN.md) / [👑捐助该项目](https://github.com/jianchang512/pyvideotrans/blob/main/about.md) / [Discord](https://discord.gg/TMCM2PfHzQ) / [Q群 902124277](https://qm.qq.com/cgi-bin/qm/qr?k=9VNSiJyInxyQ3HK3vmOTibo8pzcDekju&jump_from=webapi&authKey=xcW1+7N1E4SM+DXqyl5d61UOtNooA1C9WR5A/yfA0fmfyUDRRSZex1WD0l+9x1kO) <img src="https://github.com/jianchang512/clone-voice/assets/3378335/20858f50-6d47-411d-939b-272fe35e474c" width="50" title="点击看大图">
 
 # 音乐人声分离工具
 
@@ -57,6 +57,43 @@ https://github.com/jianchang512/vocal-separate/assets/3378335/8e6b1b20-70d4-45e3
 6. [下载模型压缩包](https://github.com/jianchang512/vocal-separate/releases/download/0.0/models-all.7z)，在项目根目录下的 `pretrained_models` 文件夹中解压，解压后，`pretrained_models`中将有3个文件夹，分别是`2stems`/`3stems`/`5stems`
 
 7. 执行  `python  start.py `，等待自动打开本地浏览器窗口。
+
+
+# API 接口
+
+接口地址: http://127.0.0.1:9999/api
+
+请求方法: POST
+
+请求参数:
+
+    file: 要分离的音视频文件
+
+    model: 模型名称 2stems,4stems,5stems
+
+返回响应: json
+    code:int, 0 处理成功完成，>0 出错
+
+    msg:str,  出错时填充错误信息
+
+    data: List[str], 每个分离后的wav url地址，例如 ['http://127.0.0.1:9999/static/files/2/accompaniment.wav']
+
+    status_text: dict[str,str], 每个分离后wav文件的包含信息,{'accompaniment': '伴奏', 'bass': '低音', 'drums': '鼓', 'other': '其他', 'piano': '琴', 'vocals': '人声'}
+
+```
+import requests
+# 请求地址
+url = "http://127.0.0.1:9999/api"
+files = {"file": open("C:\\Users\\c1\\Videos\\2.wav", "rb")}
+data={"model":"2stems"}
+response = requests.request("POST", url, timeout=600, data=data,files=files)
+print(response.json())
+
+{'code': 0, 'data': ['http://127.0.0.1:9999/static/files/2/accompaniment.wav', 'http://127.0.0.1:9999/static/files/2/vocals.wav'], 'msg': '分离成功
+', 'status_text': {'accompaniment': '伴奏', 'bass': '低音', 'drums': '鼓', 'other': '其他', 'piano': '琴', 'vocals': '人声'}}
+
+
+```
 
 
 

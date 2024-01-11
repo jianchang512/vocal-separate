@@ -47,7 +47,8 @@ def checkupdate():
             if d['version_num']>vocal.VERSION:
                 cfg.updatetips=f'New version {d["version"]}'
     except Exception as e:
-        pass
+        print(e)
+
 
 def openweb(web_address):
     webbrowser.open("http://"+web_address)

@@ -1,10 +1,11 @@
 import logging
 import threading
-import sys
 from flask import Flask, request, render_template, jsonify, send_from_directory
 import os
-from gevent.pywsgi import WSGIServer, WSGIHandler,LoggingLogAdapter
+from gevent.pywsgi import WSGIServer, WSGIHandler
 from logging.handlers import RotatingFileHandler
+
+import vocal
 from vocal import cfg, tool
 from vocal.cfg import ROOT_DIR
 import subprocess
@@ -44,7 +45,7 @@ def static_files(filename):
 
 @app.route('/')
 def index():
-    return render_template("index.html",cuda=cfg.cuda, language=cfg.LANG,root_dir=ROOT_DIR.replace('\\', '/'))
+    return render_template("index.html",version=vocal.version_str,cuda=cfg.cuda, language=cfg.LANG,root_dir=ROOT_DIR.replace('\\', '/'))
 
 
 # 上传音频
@@ -79,7 +80,7 @@ def upload():
             audio_file.save(wav_file)
         else:
             return jsonify({"code": 1, "msg": f"{cfg.transobj['lang3']} {ext}"})
-        
+
         # 返回成功的响应
         return jsonify({'code': 0, 'msg': cfg.transobj['lang1']+msg, "data": os.path.basename(wav_file)})
     except Exception as e:
@@ -132,6 +133,78 @@ def process():
             urllist.append(f'http://{cfg.web_address}/static/files/{noextname}/{it}')
 
     return jsonify({"code": 0, "msg": cfg.transobj['lang6'], "data": data, "urllist": urllist,"dirname":dirname})
+
+
+@app.route('/api',methods=['POST'])
+def api():
+    try:
+        # 获取上传的文件
+        audio_file = request.files['file']
+        model = request.form.get("model")
+        # 如果是mp4
+        noextname, ext = os.path.splitext(audio_file.filename)
+        ext = ext.lower()
+        # 如果是视频，先分离
+        wav_file = os.path.join(cfg.TMP_DIR, f'{noextname}.wav')
+        if not os.path.exists(wav_file) or os.path.getsize(wav_file) == 0:
+            if ext in ['.mp4', '.mov', '.avi', '.mkv', '.mpeg', '.mp3', '.flac']:
+                video_file = os.path.join(cfg.TMP_DIR, f'{noextname}{ext}')
+                audio_file.save(video_file)
+                params = [
+                    "-i",
+                    video_file,
+                ]
+                if ext not in ['.mp3', '.flac']:
+                    params.append('-vn')
+                params.append(wav_file)
+                rs = tool.runffmpeg(params)
+                if rs != 'ok':
+                    return jsonify({"code": 1, "msg": rs})
+            elif ext == '.wav':
+                audio_file.save(wav_file)
+            else:
+                return jsonify({"code": 1, "msg": f"{cfg.transobj['lang3']} {ext}"})
+
+        # 返回成功的响应
+        if not os.path.exists(wav_file):
+            return jsonify({"code": 1, "msg": f"{wav_file} {cfg.langlist['lang5']}"})
+        if not os.path.exists(os.path.join(cfg.MODEL_DIR, model, 'model.meta')):
+            return jsonify({"code": 1, "msg": f"{model} {cfg.transobj['lang4']}"})
+        try:
+            p = subprocess.run(['ffprobe', '-v', 'error', '-show_entries', "format=duration", '-of',
+                                "default=noprint_wrappers=1:nokey=1", wav_file], capture_output=True)
+            if p.returncode == 0:
+                sec = float(p.stdout)
+        except:
+            sec = 1800
+        print(f'{sec=}')
+        separator = Separator(f'spleeter:{model}', multiprocess=False)
+        dirname = os.path.join(cfg.FILES_DIR, noextname)
+        try:
+            separator.separate_to_file(wav_file, destination=dirname, filename_format="{instrument}.{codec}",
+                                       duration=sec)
+        except Exception as e:
+            return jsonify({"code": 1, "msg": str(e)})
+        status = {
+            "accompaniment.wav":"accompaniment audio" if cfg.LANG=='en' else "伴奏",
+            "bass.wav": "bass audio" if cfg.LANG=='en' else"低音",
+            "drums.wav": "drums audio" if cfg.LANG=='en' else"鼓",
+            "piano.wav": "piano audio" if cfg.LANG=='en' else"琴",
+            "vocals.wav": "vocals audio" if cfg.LANG=='en' else"人声",
+            "other.wav": "other audio" if cfg.LANG=='en' else"其他"
+        }
+        # data = []
+        urllist = []
+        for it in os.listdir(dirname):
+            if it.endswith('.wav'):
+                urllist.append(f'http://{cfg.web_address}/static/files/{noextname}/{it}')
+
+        return jsonify({"code": 0, "msg": cfg.transobj['lang6'], "data": urllist,"status_text":status})
+    except Exception as e:
+        app.logger.error(f'[upload]error: {e}')
+        return jsonify({'code': 2, 'msg': cfg.transobj['lang2']})
+
+
 
 
 @app.route('/checkupdate', methods=['GET', 'POST'])

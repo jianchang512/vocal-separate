@@ -1,4 +1,4 @@
-[English README](./README_EN.md) / [👑捐助该项目](https://github.com/jianchang512/pyvideotrans/blob/main/about.md) / [Discord](https://discord.gg/TMCM2PfHzQ) / Q群 608815898
+[English README](./README_EN.md) / [👑捐助该项目](https://github.com/jianchang512/pyvideotrans/blob/main/about.md) / [Discord](https://discord.gg/TMCM2PfHzQ) / Q群 905581228
 
 # 音乐人声分离工具
 
